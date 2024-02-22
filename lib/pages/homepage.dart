@@ -1,4 +1,9 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
+import 'connecttodevice.dart';
+import 'lib/chart.dart';
+import 'package:VNITPROJECT/db/database.dart';
 
 class Homepage extends StatefulWidget {
   @override
@@ -14,7 +19,11 @@ class _HomepageState extends State<Homepage> {
   TextEditingController _bp = TextEditingController();
   bool _isRightHanded = true; // Default value for right-handed
 
+  DatabaseHelper db = DatabaseHelper();
+  db.initDatabase();
+
   bool receiving = true;
+  List<int> value = [];
 
   @override
   Widget build(BuildContext context) {
@@ -274,10 +283,14 @@ class _HomepageState extends State<Homepage> {
                       Padding(
                         padding: const EdgeInsets.all(16.0),
                         child: ElevatedButton(
-                          onPressed: () {
+                          onPressed: () async {
                             if (_validateInputs()) {
-                              Navigator.of(context)
-                                  .pushReplacementNamed('/graphs');
+                              List<int> values =
+                                  await Bluetooth.startListening();
+                              value.addAll(values) ;
+                              db.insertUserData(value1 = values[0], value2 = values[1], value3 = values[2]);
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => Chart(value)));
                             } else {
                               // Show dialog if validation fails
                               showDialog(

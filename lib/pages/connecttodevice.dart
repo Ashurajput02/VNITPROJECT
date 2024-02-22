@@ -1,6 +1,7 @@
 // ignore_for_file: library_private_types_in_public_api
 
 import 'dart:async';
+import 'dart:typed_data';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +15,7 @@ class Bluetooth {
   static String deviceAddress = "C8:F0:9E:48:C4:F6";
   static List<int> receivedDataList = [];
   static int area = 0;
+  static List<int> value= [];
 
   static Future<void> connectToDevice(String address) async {
     try {
@@ -21,24 +23,24 @@ class Bluetooth {
       isConnected = true;
       print('Connected to Arduino');
 
-      connection!.input!.listen((Uint8List data) {
-        // Handle received data as needed
-        String receivedData = String.fromCharCodes(data);
-        int parsedData = data.first;
-        area += parsedData;
-        print('Received Data packet: ${data.join(', ')}');
+      // connection!.input!.listen((Uint8List data) {
+      //   // Handle received data as needed
+      //   String receivedData = String.fromCharCodes(data);
+      //   int parsedData = data.first;
+      //   area += parsedData;
+      //   print('Received Data packet: ${data.join(', ')}');
 
-        // receivedDataList.add(int.tryParse(receivedData)?? 0);
-        receivedDataList.add(parsedData);
-        print('Received Data: $receivedData');
+      //   // receivedDataList.add(int.tryParse(receivedData)?? 0);
+      //   receivedDataList.add(parsedData);
+      //   print('Received Data: $receivedData');
 
-        Future.delayed(Duration(milliseconds: 100), () {
-          print('receivedDataList Length: ${receivedDataList.length}');
-          print('receivedDataList Contents: $receivedDataList');
-        });
-      }, onDone: () {
-        isConnected = false;
-      });
+      //   Future.delayed(Duration(milliseconds: 100), () {
+      //     print('receivedDataList Length: ${receivedDataList.length}');
+      //     print('receivedDataList Contents: $receivedDataList');
+      //   });
+      // }, onDone: () {
+      //   isConnected = false;
+      // });
     } catch (exception, stackTrace) {
       print('Cannot connect, exception occurred: $exception');
       print('StackTrace: $stackTrace');
@@ -64,13 +66,24 @@ class Bluetooth {
     }
   }
 
-  static String startListening() {
+  static List<int> startListening() {
     String receivedData = '';
     connection!.input!.listen(
       (Uint8List data) {
         receivedData = String.fromCharCodes(data);
         print('Received: $receivedData');
         // Handle your received data here
+        List<String> lines = receivedData.split('\n');
+
+        if (lines.length >= 3) {
+          value[0] = int.tryParse(lines[0]) ?? 0;
+          value[1] = int.tryParse(lines[1]) ?? 0;
+          value[2] = int.tryParse(lines[2]) ?? 0;
+
+          print('Value 1: $value[0]');
+          print('Value 2: $value[1]');
+          print('Value 3: $value[2]');
+        }
       },
 
       // Handle Bluetooth connection closed event
@@ -79,7 +92,7 @@ class Bluetooth {
         connection = null;
       },
     );
-    return receivedData;
+    return value;
   }
 
   static void stopBluetooth() {

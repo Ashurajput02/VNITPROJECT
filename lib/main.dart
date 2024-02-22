@@ -1,8 +1,10 @@
-import 'package:flutter/material.dart';
+import "package:flutter/material.dart";
 import 'config/approutes.dart';
+import 'db/database.dart';
 
 void main() {
   runApp(MyApp());
+  
 }
 
 class MyApp extends StatelessWidget {
