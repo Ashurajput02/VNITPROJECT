@@ -1,16 +1,19 @@
 import 'dart:html';
 
 import 'package:flutter/material.dart';
+import 'package:vnitproject/chart.dart';
+import 'package:vnitproject/db/database.dart';
 import 'connecttodevice.dart';
-import 'lib/chart.dart';
-import 'package:VNITPROJECT/db/database.dart';
 
-class Homepage extends StatefulWidget {
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
   @override
-  State<Homepage> createState() => _HomepageState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _HomepageState extends State<Homepage> {
+class _HomePageState extends State<HomePage> {
+  _HomePageState();
   TextEditingController _name = TextEditingController();
   TextEditingController _age = TextEditingController();
   String _selectedSex = 'Male'; // Default value for sex
@@ -20,7 +23,6 @@ class _HomepageState extends State<Homepage> {
   bool _isRightHanded = true; // Default value for right-handed
 
   DatabaseHelper db = DatabaseHelper();
-  db.initDatabase();
 
   bool receiving = true;
   List<int> value = [];
@@ -285,12 +287,18 @@ class _HomepageState extends State<Homepage> {
                         child: ElevatedButton(
                           onPressed: () async {
                             if (_validateInputs()) {
+                              await DatabaseHelper.initDatabase();
                               List<int> values =
                                   await Bluetooth.startListening();
-                              value.addAll(values) ;
-                              db.insertUserData(value1 = values[0], value2 = values[1], value3 = values[2]);
+
+                              value.addAll(values);
+                              db.insertUserData(
+                                  value1: values[0],
+                                  value2: values[1],
+                                  value3: values[2]);
                               Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => Chart(value)));
+                                  builder: (context) =>
+                                      Chart(chartData: value)));
                             } else {
                               // Show dialog if validation fails
                               showDialog(
