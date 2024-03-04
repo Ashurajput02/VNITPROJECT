@@ -19,6 +19,7 @@ class BleDeviceManager {
   static bool _isDisconnecting = false;
   static int? _rssi;
   static int? _mtuSize;
+  static List<int> value = [];
 
   static void initialize(BluetoothDevice device) {
     _connectionStateSubscription = device.connectionState.listen((state) async {
@@ -102,17 +103,24 @@ class BleDeviceManager {
     }
   }
 
-  static void parseReceivedData(Uint8List dataBytes) {
+  static List<int> parseReceivedData(Uint8List dataBytes) {
     if (dataBytes.length >= 12) {
-      int firstInteger = bytesToInt(dataBytes.sublist(0, 4));
-      int secondInteger = bytesToInt(dataBytes.sublist(4, 8));
-      int thirdInteger = bytesToInt(dataBytes.sublist(8, 12));
-      print('First Integer: $firstInteger');
-      print('Second Integer: $secondInteger');
-      print('Third Integer: $thirdInteger');
-    } else {
-      print('Incomplete data received');
+      String receivedData = String.fromCharCodes(dataBytes);
+      print('Received: $receivedData');
+      // Handle your received data here
+      List<String> lines = receivedData.split('\n');
+
+      if (lines.length >= 3) {
+        value[0] = int.tryParse(lines[0]) ?? 0;
+        value[1] = int.tryParse(lines[1]) ?? 0;
+        value[2] = int.tryParse(lines[2]) ?? 0;
+
+        print('Value 1: ${value[0]}');
+        print('Value 2: ${value[1]}');
+        print('Value 3: ${value[2]}');
+      }
     }
+    return value;
   }
 
   static int bytesToInt(List<int> bytes) {
