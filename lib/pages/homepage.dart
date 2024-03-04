@@ -35,7 +35,7 @@ class _HomePageState extends State<HomePage> {
         height: MediaQuery.of(context).size.height,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
-          gradient: LinearGradient(
+          gradient: const LinearGradient(
             begin: Alignment.topRight,
             end: Alignment.bottomLeft,
             colors: [Color(0xff302d7d), Color(0x00ffffff)],
@@ -43,7 +43,7 @@ class _HomePageState extends State<HomePage> {
         ),
         child: Column(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 73,
             ),
             Stack(
@@ -73,7 +73,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 31,
             ),
             Expanded(
@@ -81,14 +81,14 @@ class _HomePageState extends State<HomePage> {
                 width: 343,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
-                  color: Color(0xccffffff),
+                  color: const Color(0xccffffff),
                 ),
                 child: SingleChildScrollView(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SizedBox(height: 48),
-                      Padding(
+                      const SizedBox(height: 48),
+                      const Padding(
                         padding: EdgeInsets.only(left: 18),
                         child: Text(
                           "Name:",
@@ -103,7 +103,7 @@ class _HomePageState extends State<HomePage> {
                         padding: const EdgeInsets.all(16.0),
                         child: TextFormField(
                           controller: _name,
-                          decoration: InputDecoration(labelText: 'Name'),
+                          decoration: const InputDecoration(labelText: 'Name'),
                           validator: (value) {
                             if (value!.isEmpty) {
                               return 'Please enter your name';
@@ -112,7 +112,7 @@ class _HomePageState extends State<HomePage> {
                           },
                         ),
                       ),
-                      Padding(
+                      const Padding(
                         padding: EdgeInsets.only(left: 18),
                         child: Text(
                           "Age:",
@@ -128,7 +128,7 @@ class _HomePageState extends State<HomePage> {
                         child: TextFormField(
                           controller: _age,
                           keyboardType: TextInputType.number,
-                          decoration: InputDecoration(labelText: 'Age'),
+                          decoration: const InputDecoration(labelText: 'Age'),
                           validator: (value) {
                             if (value!.isEmpty) {
                               return 'Please enter your age';
@@ -138,7 +138,7 @@ class _HomePageState extends State<HomePage> {
                           },
                         ),
                       ),
-                      Padding(
+                      const Padding(
                         padding: EdgeInsets.only(left: 18),
                         child: Text(
                           "Sex:",
@@ -165,12 +165,12 @@ class _HomePageState extends State<HomePage> {
                               _selectedSex = newValue!;
                             });
                           },
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             labelText: 'Sex',
                           ),
                         ),
                       ),
-                      Padding(
+                      const Padding(
                         padding: EdgeInsets.only(left: 18),
                         child: Text(
                           "Weight:",
@@ -187,7 +187,7 @@ class _HomePageState extends State<HomePage> {
                           controller: _weight,
                           keyboardType: TextInputType.number,
                           decoration:
-                              InputDecoration(labelText: 'Enter your weight'),
+                              const InputDecoration(labelText: 'Enter your weight'),
                           validator: (value) {
                             if (value!.isEmpty) {
                               return 'Please enter your weight';
@@ -197,7 +197,7 @@ class _HomePageState extends State<HomePage> {
                           },
                         ),
                       ),
-                      Padding(
+                      const Padding(
                         padding: EdgeInsets.only(left: 18),
                         child: Text(
                           "Height:",
@@ -214,7 +214,7 @@ class _HomePageState extends State<HomePage> {
                           controller: _height,
                           keyboardType: TextInputType.number,
                           decoration:
-                              InputDecoration(labelText: 'Enter your height'),
+                              const InputDecoration(labelText: 'Enter your height'),
                           validator: (value) {
                             if (value!.isEmpty) {
                               return 'Please enter your height';
@@ -224,7 +224,7 @@ class _HomePageState extends State<HomePage> {
                           },
                         ),
                       ),
-                      Padding(
+                      const Padding(
                         padding: EdgeInsets.only(left: 18),
                         child: Text(
                           "BP:",
@@ -241,7 +241,7 @@ class _HomePageState extends State<HomePage> {
                           controller: _bp,
                           keyboardType: TextInputType.number,
                           decoration:
-                              InputDecoration(labelText: 'Enter your BP'),
+                              const InputDecoration(labelText: 'Enter your BP'),
                           validator: (value) {
                             if (value!.isEmpty) {
                               return 'Please enter your BP';
@@ -252,10 +252,10 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.only(left: 18),
+                        padding: const EdgeInsets.only(left: 18),
                         child: Row(
                           children: [
-                            Text(
+                            const Text(
                               "Left-Handed:",
                               style: TextStyle(
                                 fontSize: 20,
@@ -271,7 +271,7 @@ class _HomePageState extends State<HomePage> {
                                 });
                               },
                             ),
-                            Text(
+                            const Text(
                               "Right-Handed",
                               style: TextStyle(
                                 fontSize: 20,
@@ -305,8 +305,8 @@ class _HomePageState extends State<HomePage> {
                                 context: context,
                                 builder: (BuildContext context) {
                                   return AlertDialog(
-                                    title: Text("Validation Error"),
-                                    content: Text(
+                                    title: const Text("Validation Error"),
+                                    content: const Text(
                                       "Please fill in all the required fields.",
                                     ),
                                     actions: <Widget>[
@@ -314,7 +314,7 @@ class _HomePageState extends State<HomePage> {
                                         onPressed: () {
                                           Navigator.of(context).pop();
                                         },
-                                        child: Text("OK"),
+                                        child: const Text("OK"),
                                       ),
                                     ],
                                   );
@@ -322,7 +322,7 @@ class _HomePageState extends State<HomePage> {
                               );
                             }
                           },
-                          child: Text('Start'),
+                          child: const Text('Start'),
                         ),
                       ),
                       // Add more fields and validations as needed

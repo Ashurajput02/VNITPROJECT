@@ -12,6 +12,7 @@ class AppRoutes {
     '/generatereport': (context) => Report(),
     '/graphs': (context) => ChartScreen(),
     'scanscreen': (context) => ScanScreen(),
+    'home': (context) => HomePage(),
   };
   //
   // static const login = '/';
