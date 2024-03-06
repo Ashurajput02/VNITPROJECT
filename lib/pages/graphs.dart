@@ -98,21 +98,10 @@ class _ChartScreenState extends State<ChartScreen> {
                     });
 
                     if (_formKey.currentState?.validate() ?? false) {
-                      String username = _name.text;
-                      String id = _id.text;
-                      String age = _age.text;
-                      String sex = _sex.text;
-                      String visit = _visitno.text;
-                      String weight = _weight.text;
-
                       await DatabaseHelper().insertUserData(
-                        username: username,
-                        age: age,
-                        gender: sex,
-                        visit: visit,
-                        area: area.toString(),
-                        id: id,
-                        weight: weight.toString(),
+                        value1: chartData1[chartData1.length - 1],
+                        value2: chartData2[chartData1.length - 1],
+                        value3: chartData3[chartData1.length - 1],
                       );
 
                       Bluetooth.stopBluetooth();

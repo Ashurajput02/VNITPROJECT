@@ -13,7 +13,7 @@ class _splashscreenfinalState extends State<splashscreenfinal> {
   void initState() {
     super.initState();
     Timer(Duration(seconds: 5), () {
-      Navigator.of(context).pushReplacementNamed('/connecttodevice');
+      Navigator.of(context).pushReplacementNamed('/scanscreen');
     });
   }
 

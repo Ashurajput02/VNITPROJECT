@@ -18,7 +18,7 @@ class Report extends StatelessWidget {
                   "assets/images/vnitfinal.webp",
                   width: 199,
                   height: 243,
-                  color: Color.fromRGBO(
+                  color: const Color.fromRGBO(
                       255, 255, 255, 0.19), // Adjust the opacity (0.0 to 1.0)
                   colorBlendMode: BlendMode.modulate,
                 ),
@@ -35,7 +35,7 @@ class Report extends StatelessWidget {
                         // Add your functionality for the button here
                         print("Generate Report Button Pressed");
                       },
-                      child: Text(
+                      child: const Text(
                         "Generate Report",
                         style: TextStyle(
                           color: Colors.white,

@@ -2,6 +2,7 @@ import 'package:vnitproject/pages/connecttodevice.dart';
 import 'package:vnitproject/pages/generatereport.dart';
 import 'package:vnitproject/pages/graphs.dart';
 import 'package:vnitproject/pages/homepage.dart';
+import 'package:vnitproject/pages/scan_screen.dart';
 import 'package:vnitproject/pages/splashscreen.dart';
 
 class AppRoutes {
@@ -10,6 +11,8 @@ class AppRoutes {
     '/connecttodevice': (context) => BluetoothScreen(),
     '/generatereport': (context) => Report(),
     '/graphs': (context) => ChartScreen(),
+    'scanscreen': (context) => ScanScreen(),
+    'home': (context) => HomePage(),
   };
   //
   // static const login = '/';

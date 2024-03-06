@@ -203,7 +203,7 @@ class _BluetoothScreenState extends State<BluetoothScreen> {
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (context) {
-                    return Homepage();
+                    return HomePage();
                   },
                 ),
               );
